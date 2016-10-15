@@ -1,0 +1,21 @@
+.content-outer {
+	width: 80%;
+	margin: 10px auto;
+	box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.4);
+	transition: box-shadow 300ms ease,
+				transform 300ms ease;
+	border: 1px solid #e0e0e0;
+	cursor:pointer;
+}
+.content-outer:hover {
+	box-shadow: 7px 7px 10px 0px rgba(0, 0, 0, 0.2);
+	transform:translate(-5px, -5px);
+}
+
+.content-inner {
+	height: 240px;
+}
+.content-footer {
+	border-top: 1px solid #e0e0e0;
+	height: 80px;
+}
