@@ -1,6 +1,6 @@
 .content-outer {
 	width: 80%;
-	margin: 10px auto;
+	margin: 20px auto;
 	box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.4);
 	transition: box-shadow 300ms ease,
 				transform 300ms ease;
@@ -13,9 +13,14 @@
 }
 
 .content-inner {
-	height: 240px;
+	max-height: 240px;
+}
+.content-inner img {
+	max-width : 100%;
+	max-height : 100%;
 }
 .content-footer {
 	border-top: 1px solid #e0e0e0;
+	text-align:center;
 	height: 80px;
 }
