@@ -3,10 +3,13 @@
 document.addEventListener("DOMContentLoaded", function() {
 	console.log("main.js");
 
-	for (var i = 0; i < 10; i++) {
-		createContent("http://lorempixel.com/640/480/nature/" + (i+1));
-		createContent("http://lorempixel.com/640/480/abstract/" + (i+1));		
-	}
+	var content = [
+		"clothsim",
+		"network",
+		"tree",
+	]
+
+	content.forEach(createContent)
 })
 
 http://lorempixel.com/output/abstract-q-c-640-480-3.jpg
@@ -14,13 +17,15 @@ http://lorempixel.com/output/abstract-q-c-640-480-3.jpg
 function createContent(url)
 {
 	document.getElementById("content-area").innerHTML += 
-		'<div class="col-xs-3">\
+		'<div class="col-xs-4">\
 			<div class="content-outer">\
 				<div class="content-inner">\
-					<img src='+url+'/>\
+					<a href="/'+url+'">\
+						<img src="thumbs/'+url+'.png"/>\
+					</a>\
 				</div>\
 				<div class="content-footer">\
-					<h4>placeholder</h4>\
+					<h4>'+url+'</h4>\
 				</div>\
 			</div>\
 		</div>'

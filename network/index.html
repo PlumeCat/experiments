@@ -1,0 +1,109 @@
+<html>
+	<body style="overflow:hidden">
+		<h4 style="text-align:center">another experimental canvas project</h4>
+		<canvas id="canvas" style="background:#202020;border:1px solid grey;display:block;width:80%;height:80%;margin:100px auto">
+		</canvas>
+		
+		<script>
+		
+		var canvas = document.getElementById("canvas");
+		var context = canvas.getContext("2d");
+		
+		var maxNodes = 100;
+		var nodes = [];
+		var R = 3;
+		
+		function init() {
+
+			canvas.width = window.innerWidth * 0.8;
+			canvas.height = window.innerHeight * 0.8;
+			canvas.style.width = "80%";
+			canvas.style.height = "80%";
+		
+			for (var i = 0; i < maxNodes; i += 1) {
+				var node = {
+					x : Math.random() * canvas.width,
+					y : Math.random() * canvas.height,
+					vx : (Math.random() - 0.5) * 2,// + 5,
+					vy : (Math.random() - 0.5) * 2,
+					
+					r : Math.floor(Math.random()*256),
+					g : Math.floor(Math.random()*256),
+					b : Math.floor(Math.random()*256),
+				}
+				nodes.push(node);
+			}
+		}
+		
+		function resize() {
+			canvas.style.margin = "none";
+			canvas.style.padding = "none";
+			canvas.width = window.innerWidth;
+			canvas.height = window.innerHeight;
+		}
+		
+		function render() {
+		
+			context.clearRect(0, 0, canvas.width, canvas.height);
+			
+			var cx = canvas.width / 2;
+			var cy = canvas.height / 2;
+			
+			for (var i = 0, nn = nodes.length; i < nn; i += 1) {
+			
+				var n = nodes[i];
+				
+				var fx = cx - n.x;
+				var fy = cy - n.y;
+				var l = Math.sqrt(fx*fx + fy*fy) * 10;
+				
+				//n.vx += fx / l;
+				//n.vy += fy / l;
+				
+				n.x += n.vx;
+				n.y += n.vy;
+				if (n.x < 0) { n.x = 0; n.vx *= -1; }
+				if (n.y < 0) { n.y = 0; n.vy *= -1; }
+				if (n.x > canvas.width) { n.x = canvas.width; n.vx *= -1; }
+				if (n.y > canvas.height) { n.y = canvas.height; n.vy *= -1; }
+			
+			
+				context.beginPath();
+				context.arc(n.x, n.y, R, 0, 2*Math.PI);
+				//context.fillStyle = "rgb("+n.r+","+n.g+","+n.b+")";
+				context.fillStyle="rgb(200,200,200)";
+				context.fill();
+				
+				for (var j = i; j < nn; j += 1) {
+					var n2 = nodes[j];
+					
+					var dx = n2.x - n.x;
+					var dy = n2.y - n.y;
+					var r2 = 200*200;
+					var s2 = dx*dx + dy*dy;
+					if (s2 < r2) {
+					
+						var a = 1 - (s2 / r2);
+						var sa = a*a;
+
+						context.beginPath();
+						context.strokeStyle="rgba(150,150,150,"+sa+")";
+						context.moveTo(n.x, n.y);
+						context.lineTo(n2.x, n2.y);
+						context.stroke();
+					}
+				}
+			}
+		
+			window.requestAnimationFrame(render);
+		}
+		
+		document.body.style.margin = document.body.style.padding = "0";
+		
+		window.onresize = resize;
+		resize();
+		init();
+		window.requestAnimationFrame(render);
+		</script>
+	</body>
+</html>

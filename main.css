@@ -9,15 +9,17 @@
 }
 .content-outer:hover {
 	box-shadow: 7px 7px 10px 0px rgba(0, 0, 0, 0.2);
-	transform:translate(-5px, -5px);
+	transform:scale(1.02, 1.02) translate(-5px, -5px);
 }
 
 .content-inner {
 	max-height: 240px;
 }
 .content-inner img {
-	max-width : 100%;
-	max-height : 100%;
+	max-width: 100%;
+	max-height: 100%;
+	display: block;
+	margin: auto auto;
 }
 .content-footer {
 	border-top: 1px solid #e0e0e0;
